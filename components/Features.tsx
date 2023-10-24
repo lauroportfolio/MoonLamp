@@ -1,40 +1,23 @@
 import Image from "next/image"
 import moonlamp from "@/public/transparentmoonlamp.png"
 import { BsBatteryCharging } from "react-icons/bs"
+import { BATTERY_ITEMS_LEFT, BATTERY_ITEMS_RIGHT } from "@/constants"
 
 const Features = () => {
   return (
-    <section className="py-5">
-      <div className="w-[89%] m-auto max-w-[1400px] grid md:grid-cols-3 grid-cols-1 items-center justify-items-center gap-5">
+    <section id="features" className="py-5">
+      <div className="container grid md:grid-cols-3 grid-cols-1 items-center justify-items-center gap-5">
         <div>
           <ul className="space-y-10">
-            <li>
-              <div className="flex gap-2 items-center text-xl font-bold text-dark">
-                <h3>Battery life</h3>
-                <div>
-                  <BsBatteryCharging size={20} />
+            {BATTERY_ITEMS_LEFT.map((item, index) => (
+              <li key={index}>
+                <div className="features_items_left">
+                  <h3>{item.title}</h3>
+                  <div>{item.icon}</div>
                 </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </li>
-            <li>
-              <div className="flex gap-2 items-center text-xl font-bold text-dark">
-                <h3>Battery life</h3>
-                <div>
-                  <BsBatteryCharging size={20} />
-                </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </li>
-            <li>
-              <div className="flex gap-2 items-center text-xl font-bold text-dark">
-                <h3>Battery life</h3>
-                <div>
-                  <BsBatteryCharging size={20} />
-                </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </li>
+                <p>{item.description}</p>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="flex justify-center items-center">
@@ -47,33 +30,15 @@ const Features = () => {
         </div>
         <div>
           <ul className="space-y-10 text-right">
-            <li>
-              <div className="flex gap-2 items-center text-xl font-bold text-dark justify-end">
-                <h3>Battery life</h3>
-                <div>
-                  <BsBatteryCharging size={20} />
+            {BATTERY_ITEMS_RIGHT.map((item, index) => (
+              <li key={index}>
+                <div className="features_items_right">
+                  <h3>{item.title}</h3>
+                  <div>{item.icon}</div>
                 </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </li>
-            <li>
-              <div className="flex gap-2 items-center text-xl font-bold text-dark justify-end">
-                <h3>Battery life</h3>
-                <div>
-                  <BsBatteryCharging size={20} />
-                </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </li>
-            <li>
-              <div className="flex gap-2 items-center text-xl font-bold text-dark justify-end">
-                <h3>Battery life</h3>
-                <div>
-                  <BsBatteryCharging size={20} />
-                </div>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </li>
+                <p>{item.description}</p>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -81,4 +46,4 @@ const Features = () => {
   )
 }
 
-export default Features
+export default Features;

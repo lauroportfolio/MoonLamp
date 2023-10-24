@@ -14,7 +14,7 @@ const Parallax = () => {
           <Button
             type="submit"
             title="Subscribe"
-            variant="flex items-center py-[5px] px-[10px] md:py-[10px] md:px-[26px] rounded-[8px] font-semibold text-md md:text-lg text-white bg-secondary w-fit gap-5"
+            variant="flex items-center py-[5px] px-[10px] md:py-[10px] md:px-[26px] rounded-[8px] font-semibold text-md md:text-lg text-white bg-secondary whitespace-nowrap flex-1 w-fit gap-5"
           />
         </div>
       </div>

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import Navbar from '../components/Navbar'
+import Hydration from '@/components/Hydration'
+import Footer from '@/components/Footer'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -12,6 +14,18 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'Moonlamp',
   description: 'E-commerce website with moonlamps',
+  icons: {
+    icon: [
+      '/favicon.ico?v=1',
+    ],
+    apple: [
+      '/apple-touch-icon.png?v=4',
+    ],
+    shortcut: [
+      '/apple-touch-icon.png',
+    ]
+  },
+  manifest: '/site.webmanifest'
 }
 
 export default function RootLayout({
@@ -22,8 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Navbar />
-        {children}
+        <Hydration>
+          <Navbar />
+          {children}
+          <Footer />
+        </Hydration>
       </body>
     </html>
   )

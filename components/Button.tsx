@@ -13,7 +13,7 @@ const Button = ({ type, title, icon, variant }: ButtonProps) => {
         type={type}
         className={variant}
     >
-      <label>
+      <label className='cursor-pointer'>
         {title}
       </label>
     </button>
