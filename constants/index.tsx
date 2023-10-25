@@ -10,6 +10,7 @@ export const NAV_LINKS = [
     { href: '#features', key: 'features', label: 'Features' },
     { href: '#faq', key: 'faq', label: 'FAQ' },
     { href: '#contact', key: 'contact', label: 'Contact' },
+    { href: '/', key: 'myorders', label: 'My Orders' },
 ]
 
 export const QUESTIONS = [

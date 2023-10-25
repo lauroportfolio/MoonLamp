@@ -1,13 +1,18 @@
 "use client"
 
-import { useState, useEffect } from "react"
+// REACT ICONS
 import { FiMenu } from "react-icons/fi"
 import { MdClose } from "react-icons/md"
-import { BsCart4, BsFillBagHeartFill } from "react-icons/bs"
+import { AiOutlineShoppingCart, AiOutlineHeart, AiOutlineUser } from "react-icons/ai"
 
+// REACT & NEXT JS
+import { useState, useEffect } from "react"
 import Image from "next/image"
-import logo from '@/public/moonlamplogo.png'
 import Link from "next/link"
+import { UserButton, useUser } from "@clerk/nextjs"
+
+// OUTROS
+import logo from '@/public/moonlamplogo.png'
 import Cart from "./Cart"
 import { useCartStore } from "@/store/useCartStore"
 import { NAV_LINKS } from "@/constants"
@@ -17,6 +22,7 @@ const Navbar = () => {
     const [isScrolling, setIsScrolling] = useState(false)
 
     const cartStore = useCartStore()
+    const {isSignedIn, user} = useUser()
 
     const mobileMenuHandler = () => {
         setOpenMobileMenu(!openMobileMenu)
@@ -50,8 +56,8 @@ const Navbar = () => {
             <div className="w-[89%] m-auto flex justify-between items-center max-w-[1400px]">
                 <Image
                     src={logo}
-                    width={200}
-                    height={200}
+                    width={150}
+                    height={150}
                     alt="moonlamp logo"
                 />
 
@@ -70,14 +76,23 @@ const Navbar = () => {
 
                 <div className="flex gap-4 items-center text-dark ml-auto md:ml-0">
                     <div onClick={() => cartStore.toggleCart()} className="cursor-pointer relative">
-                        <BsCart4 size={20} />
+                        <AiOutlineShoppingCart size={20} />
                         {cartStore.cart.length > 0 && (
                             <span className="bg-primary text-white text-sm font-bold w-4 h-4 rounded-full absolute left-2 bottom-3 flex items-center justify-center">{cartStore.cart.length}</span>
                         )}
                     </div>
                     <div>
-                        <BsFillBagHeartFill size={20} />
+                        <AiOutlineHeart size={20} />
                     </div>
+                    {!isSignedIn ? (
+                        <Link href={"/sign-in"}>
+                            <AiOutlineUser size={25} />
+                        </Link>
+                    ): (
+                        <div>
+                            <UserButton />
+                        </div>
+                    )}
                 </div>
 
                 <div className="md:hidden ml-4 cursor-pointer" onClick={mobileMenuHandler}>
