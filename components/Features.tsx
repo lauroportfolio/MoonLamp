@@ -7,7 +7,7 @@ const Features = () => {
   return (
     <section id="features" className="py-5">
       <div className="container grid md:grid-cols-3 grid-cols-1 items-center justify-items-center gap-5">
-        <div>
+        <div className="mb-2 mt-2">
           <ul className="space-y-10">
             {BATTERY_ITEMS_LEFT.map((item, index) => (
               <li key={index}>
