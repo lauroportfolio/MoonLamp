@@ -2,7 +2,7 @@ import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import { useCartStore } from "@/store/useCartStore"
 import { useState, useEffect } from "react"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { useClerk } from "@clerk/nextjs"
 import CheckoutForm from "./CheckoutForm"
 
