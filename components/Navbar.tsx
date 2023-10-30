@@ -16,12 +16,15 @@ import logo from '@/public/moonlamplogo.png'
 import Cart from "./Cart"
 import { useCartStore } from "@/store/useCartStore"
 import { NAV_LINKS } from "@/constants"
+import { useWishlistStore } from "@/store/useWishlistStore"
+import Wishlist from "./Wishlist"
 
 const Navbar = () => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false)
     const [isScrolling, setIsScrolling] = useState(false)
 
     const cartStore = useCartStore()
+    const wishlistStore = useWishlistStore()
     const {isSignedIn, user} = useUser()
 
     const mobileMenuHandler = () => {
@@ -54,12 +57,14 @@ const Navbar = () => {
     return (
         <nav className={`py-4 w-full ${isScrolling ? "fixed top-0 bg-white shadow-lg z-10" : "relative"}`}>
             <div className="w-[89%] m-auto flex justify-between items-center max-w-[1400px]">
-                <Image
-                    src={logo}
-                    width={150}
-                    height={150}
-                    alt="moonlamp logo"
-                />
+                <a href="/" className="cursor-pointer">
+                    <Image
+                        src={logo}
+                        width={150}
+                        height={150}
+                        alt="moonlamp logo"
+                    />
+                </a>
 
                 <ul className={`md:flex items-center gap-8 md:static absolute text-gray-600 ${openMobileMenu ? "top-12 mt-3 py-10 w-full bg-secondary left-0 text-center space-y-10 text-white font-medium drop-shadow-lg z-20" : "hidden"}`}>
                     {NAV_LINKS.map((link) => (
@@ -81,7 +86,7 @@ const Navbar = () => {
                             <span className="bg-primary text-white text-sm font-bold w-4 h-4 rounded-full absolute left-2 bottom-3 flex items-center justify-center">{cartStore.cart.length}</span>
                         )}
                     </div>
-                    <div>
+                    <div className="cursor-pointer" onClick={() => wishlistStore.toggleWishList()}>
                         <AiOutlineHeart size={20} />
                     </div>
                     {!isSignedIn ? (
@@ -101,6 +106,7 @@ const Navbar = () => {
             </div>
 
             {!cartStore.isOpen && <Cart />}
+            {!wishlistStore.openWishlist && <Wishlist />}
         </nav>
     )
 }

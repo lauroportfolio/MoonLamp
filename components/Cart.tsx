@@ -2,7 +2,7 @@ import { useCartStore } from "@/store/useCartStore"
 import Image from "next/image"
 import formatPrice from "@/utils/formatPrice"
 import { totalPrice } from "@/utils/totalPrice"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 
 import DecrementButton from "./UI/DecrementButton"
 import IncrementButton from "./UI/IncrementButton"
@@ -14,10 +14,13 @@ const Cart = () => {
   const total = totalPrice(cartStore.cart)
 
   return (
-    <motion.div onClick={() => cartStore.toggleCart()} className="fixed w-full h-screen top-0 left-0 bg-black/25 z-50">
+    <AnimatePresence>
+      <motion.div onClick={() => cartStore.toggleCart()} className="fixed w-full h-screen top-0 left-0 bg-black/25 z-50">
       <motion.div
+        key="cart-menu"
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
+        exit={{ x: "100%" }}
         transition={{ duration: 0.3 }}
         onClick={(e) => e.stopPropagation()}
         className="bg-white absolute right-0 top-0 md:w-2/5 w-3/4 h-screen p-12"
@@ -32,7 +35,7 @@ const Cart = () => {
             </motion.button>
             {cartStore.cart.map((product) => (
               <div
-                className="sm:flex-col md:flex-row flex py-4 gap-4 items-center border-b-2 border-b-gray-300 justify-between mb-5"
+                className="flex lg:flex-row flex-col py-4 gap-4 items-center border-b-2 border-b-gray-300 justify-between mb-5"
               >
                 <Image
                   src={product.image}
@@ -71,6 +74,8 @@ const Cart = () => {
         {cartStore.onCheckout === "success" && <OrderSuccess />}
       </motion.div>
     </motion.div>
+    </AnimatePresence>
+    
   )
 }
 
