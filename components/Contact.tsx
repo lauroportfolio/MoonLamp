@@ -1,9 +1,39 @@
 "use client"
 
-import Button from "./Button"
+import { useState } from "react";
 import { sendEmail } from "./SendEmail"
 
 const Contact = () => {
+    const initialFormData = {
+        email: "",
+        subject: "",
+        message: "",
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
+
+    const handleInputChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+
+        const formDataToSend = new FormData();
+        formDataToSend.append("email", formData.email);
+        formDataToSend.append("subject", formData.subject);
+        formDataToSend.append("message", formData.message);
+
+        await sendEmail(formDataToSend);
+
+        // Limpar os campos após o envio bem-sucedido
+        setFormData(initialFormData);
+    };
+
     return (
         <section id="contact" className="py-10">
             <div className="container">
@@ -35,7 +65,7 @@ const Contact = () => {
                         </div>
                     </div>
                     <div className="lg:col-span-2">
-                        <form action={async formData => {
+                        <form onSubmit={handleSubmit} action={async formData => {
                             await sendEmail(formData)
                         }}>
                             <div className="space-y-6">
@@ -44,6 +74,8 @@ const Contact = () => {
                                         type="email"
                                         name="email"
                                         required
+                                        value={formData.email}
+                                        onChange={handleInputChange}
                                         id="email"
                                         className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
                                         placeholder="Your Email..."
@@ -51,6 +83,9 @@ const Contact = () => {
                                     <input
                                         type="text"
                                         name="subject"
+                                        required
+                                        value={formData.subject}
+                                        onChange={handleInputChange}
                                         id="subject"
                                         className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
                                         placeholder="Subject..."
@@ -62,6 +97,8 @@ const Contact = () => {
                                     name="message"
                                     id="message"
                                     required
+                                    value={formData.message}
+                                    onChange={handleInputChange}
                                     className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
                                     placeholder="Your Message..."
                                 />
