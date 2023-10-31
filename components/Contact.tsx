@@ -1,4 +1,7 @@
+"use client"
+
 import Button from "./Button"
+import { sendEmail } from "./SendEmail"
 
 const Contact = () => {
     return (
@@ -26,53 +29,47 @@ const Contact = () => {
                             <div className="mb-6">
                                 <h1 className="text-base font-medium mb-2">
                                     Address
-                                </h1>
+                                 </h1>
                                 <h2 className="text-gray-500 text-sm">194 Elon Musk parkway drive Raleigh, NC 12302</h2>
                             </div>
                         </div>
                     </div>
                     <div className="lg:col-span-2">
-                        <form>
+                        <form action={async formData => {
+                            await sendEmail(formData)
+                        }}>
                             <div className="space-y-6">
-                                <div className="grid    grid-cols-1 md:grid-cols-2 gap-6">
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
-                                        placeholder="Your Name..."
-                                    />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <input
                                         type="email"
                                         name="email"
+                                        required
                                         id="email"
                                         className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
                                         placeholder="Your Email..."
                                     />
+                                    <input
+                                        type="text"
+                                        name="subject"
+                                        id="subject"
+                                        className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
+                                        placeholder="Subject..."
+                                    />
                                 </div>
-                                <input
-                                    type="text"
-                                    name="subject"
-                                    id="subject"
-                                    className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
-                                    placeholder="Subject..."
-                                />
-
                                 <textarea
                                     rows={3}
-                                    style={{resize: "none"}}
+                                    style={{ resize: "none" }}
                                     name="message"
                                     id="message"
+                                    required
                                     className="border border-gray-300 text-gray-900 text-sm block w-full py-3 px-2"
                                     placeholder="Your Message..."
                                 />
 
                                 <div className="text-right">
-                                    <Button
-                                        type="submit"
-                                        title="Submit"
-                                        variant="py-2 px-4 rounded-lg uppercase bg-primary text-white"
-                                    />
+                                    <button type="submit" className="py-2 px-4 rounded-lg uppercase bg-primary text-white">
+                                        Submit
+                                    </button>
                                 </div>
                             </div>
                         </form>

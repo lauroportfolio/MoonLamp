@@ -4,10 +4,11 @@ type ButtonProps = {
     type: 'button' | 'submit'
     title: string,
     icon?: string,
-    variant: string
+    variant: string,
+    disabled?: boolean
 }
 
-const Button = ({ type, title, icon, variant }: ButtonProps) => {
+const Button = ({ type, title, icon, variant, disabled }: ButtonProps) => {
   return (
     <button
         type={type}
